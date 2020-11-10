@@ -5,21 +5,23 @@ import xlrd
 import xlwt
 
 global bus_data  # 用于存储第一个工作表内的节点数据：【重命名，原节点名，坐标x，坐标y】
-global line_data   # 用于存储第二个工作表内的线路数据：如两节点间有线路，则对应mat[i，j]和mat[j,i]置1
+global line_data  # 用于存储第二个工作表内的线路数据：如两节点间有线路，则对应mat[i，j]和mat[j,i]置1
 
 np.set_printoptions(threshold=np.inf)
 
 
+
+
 def read_excel():  # 读取模块
-    xl = xlrd.open_workbook(r'D:\AI\data\数据.xlsx')
+    xl = xlrd.open_workbook(r'F:\360MoveData\Users\DELL\Desktop\数据.xlsx')
     table0 = xl.sheets()[0]  # 读取第一个工作表
     rows0 = table0.nrows
     cols0 = table0.ncols
     global bus_data
     global line_data
-    bus_data = np.zeros((rows0 , cols0+2))  # 初始化节点数据记录矩阵
-    line_data = np.zeros((rows0, rows0))
-    for i in range(rows0 ):
+    bus_data = np.zeros((rows0, cols0 + 2))  # 初始化节点数据记录矩阵
+    line_data = np.zeros((rows0 - 1, rows0 - 1))
+    for i in range(rows0):
         bus_data[i, 0] = i
     for i in range(rows0):
         if i != 0:  # 略去第一行标题数据
@@ -56,12 +58,11 @@ def read_excel():  # 读取模块
         elif ctype2 == 1:
             cell_value2 = re.sub("\D", "  ", cell_value2)
             end_point = find(int(cell_value2.split()[0]) + 100)
-        line_data[start_point, end_point] = 1
-        line_data[end_point, start_point] = 1
+        line_data[start_point - 1, end_point - 1] = 1
+        line_data[end_point - 1, start_point - 1] = 1
         i += 1
     print(bus_data)
     print(line_data)
-
 
 
 def find(initial_NO):  # 该函数用来寻找节点的重编号
@@ -70,6 +71,5 @@ def find(initial_NO):  # 该函数用来寻找节点的重编号
         if bus_data[i, 1] == initial_NO:
             return int(bus_data[i, 0])
 
+
 read_excel()
-
-
