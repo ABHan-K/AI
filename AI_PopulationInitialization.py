@@ -16,8 +16,11 @@ class PopIni:
         y = random.randint(0, 29)
         return x, y
 
-    def pop_ini(self):
+    def pop_ini(self):  # 初始化初始种群
         for i in range(self.dynamic_num * 100):
             for j in range(self.dynamic_num):
                 self.dynamic_dat[j, 1], self.dynamic_dat[j, 2] = self.rand_location()  # 生成个体随机坐标
-            self.individual[i] = self.individual.DNA(self.dynamic_dat) # todo 预留创建个体文件
+            self.individual[i] = self.individual.DNA(self.dynamic_dat)  # todo 预留创建个体文件
+
+    def pop_data_get(self):  # return 种群数量和种群矩阵
+        return self.dynamic_num * 100, self.individual
