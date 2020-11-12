@@ -43,6 +43,7 @@ class Read:
                             # 将trans节点与其他节点区分开来,把节点编号加100
         self.static_point = np.zeros((self.count_static, 4))  # 该矩阵用于存储静态点数据
         self.dynamic_point = np.zeros((self.rows0 - self.count_static - 1, 4))  # 该矩阵用于存储动态点数据
+        self.count_dynamic = self.rows0 - self.count_static  # 记录动态节点个数
 
     def read_line(self):  # 该函数用来根据第二个工作表的数据生成节点间的线路连线矩阵
         i = 1
@@ -88,3 +89,6 @@ class Read:
                 self.static_point[i_static, 3] = self.bus_data[i, 3]
                 i_static += 1
             i += 1
+
+    def get_data_for_iteration(self):
+        return self.count_dynamic, np.delete(self.count_dynamic, 1, axis=1)
