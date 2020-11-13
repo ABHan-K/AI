@@ -10,13 +10,18 @@ class Iteration:
         self.fitness = np.zeros(self.individual_num)
         self.dead = np.zeros(self.individual_num)
         self.fit = fc.fitness()  # todo 预留适应度计算
-        self.fit_sum = 0
+        self.pick_list=zeros(self.individual_num)
 
     def fit_count(self):
         for i in range(self.individual_num):
             self.fitness[i] = self.fit.fitcount(self.individual_dat[i])
+        if 0 in self.fitness:
+            return np.where(self.fitness <= 0)
+        else:
+            return -1
+
+    def pick(self,p):
+
+
 
     def killing(self):
-        self.fit_sum = 0
-        for i in range(self.individual_num):
-            self.fit_sum += self.fitness[i]
