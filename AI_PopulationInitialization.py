@@ -7,7 +7,7 @@ import random
 class PopIni:
     def __init__(self, filename):
         self.net_data = ind.Read(filename)
-        self.dynamic_num, self.dynamic_dat = self.net_data.bus_data()
+        self.dynamic_num, self.dynamic_dat = self.net_data.get_data_for_iteration()
         self.pop = np.zeros((self.dynamic_num * 100, self.dynamic_num))  # 初始化节点坐标矩阵
         self.individual = ci.individual()  # todo 预留创建个体文件
 
@@ -23,4 +23,4 @@ class PopIni:
             self.individual[i] = self.individual.DNA(self.dynamic_dat)  # todo 预留创建个体文件
 
     def pop_data_get(self):  # return 种群数量和种群矩阵
-        return self.dynamic_num * 100, self.individual
+        return self.dynamic_num * 100, self.individual, self.dynamic_num
