@@ -43,9 +43,9 @@ class Read:
                             # 将trans节点与其他节点区分开来,把节点编号加100
         self.static_point = np.zeros((self.count_static, 4))  # 该矩阵用于存储静态点数据
         self.dynamic_point = np.zeros((self.rows0 - self.count_static - 1, 4))  # 该矩阵用于存储动态点数据
-        self.count_dynamic = self.rows0 - self.count_static  # 记录动态节点个数
+        self.line_point = np.zeros((self.rows1 - 1, 2))  # 该矩阵用来存储连线两个端点的重编号
 
-    def read_line(self):  # 该函数用来根据第二个工作表的数据生成节点间的线路连线矩阵
+    def read_line(self):  # 该函数用来根据第二个工作表的数据生成节点间的线路连线矩阵,同时生成一个记录连线端点重编号的矩阵
         i = 1
         while i < self.rows1:
             ctype1 = self.table1.cell(i, 1).ctype  # 读取起点节点
@@ -64,6 +64,8 @@ class Read:
                 end_point = Read.find(self, int(cell_value2.split()[0]) + 100)
             self.line_data[start_point - 1, end_point - 1] = 1
             self.line_data[end_point - 1, start_point - 1] = 1
+            self.line_point[i - 1, 0] = start_point
+            self.line_point[i - 1, 1] = end_point
             i += 1
 
     def find(self, initial_NO):  # 该函数用来寻找节点的重编号
