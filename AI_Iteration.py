@@ -67,7 +67,9 @@ class Iteration:
         a = self.fit_count()
         while a == -1:
             self.killing()
-            self.reproduction()
+            a = randint(0, self.individual_num * 1 / 3 - 1)
+            b = randint(0, self.individual_num * 1 / 3 - 1)
+            self.reproduction(a, b)
             a = self.fit_count()
 
         return self.individual_dat[a[0]]
