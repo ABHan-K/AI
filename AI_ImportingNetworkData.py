@@ -44,6 +44,7 @@ class Read:
         self.static_point = np.zeros((self.count_static, 4))  # 该矩阵用于存储静态点数据
         self.dynamic_point = np.zeros((self.rows0 - self.count_static - 1, 4))  # 该矩阵用于存储动态点数据
         self.line_point = np.zeros((self.rows1 - 1, 2))  # 该矩阵用来存储连线两个端点的重编号
+        self.main()
 
     def read_line(self):  # 该函数用来根据第二个工作表的数据生成节点间的线路连线矩阵,同时生成一个记录连线端点重编号的矩阵
         i = 1
@@ -92,5 +93,10 @@ class Read:
                 i_static += 1
             i += 1
 
+
     def get_data_for_iteration(self):
         return self.count_dynamic, np.delete(self.count_dynamic, 1, axis=1)
+
+    def main(self):
+        self.read_line()
+        self.split_data()
