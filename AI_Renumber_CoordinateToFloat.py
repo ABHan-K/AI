@@ -16,7 +16,11 @@ class Renumer_CoordinateToFloat:
             # 将浮点数存为x.y的形式，第二列数据 = x + y/100，如当x = 2，y = 10时，为避免2.10存为2.1, 需令浮点数坐标保存两位小数
             i += 1
 
-    def get_floatcoordinate(self):  # 该函数用于返回浮点数坐标矩阵（列表）
-        return self.dynamic_floatcoordinate
+    def floatlist(self, *coordinatearray):  # 建立将xy坐标转为浮点数数列的函数floatlist
+        floatlist = np.zeros((1, self.dynamic_num))  # 建立1行n列的数列存储浮点数坐标
 
+        for i in range(self.dynamic_num):
+            floatlist[0][i] = float('%.2f' % (coordinatearray[i][0] + coordinatearray[i][1] / 100))  # 将浮点数存为x.y的形式
+            i += 1
 
+        return floatlist  # 返回浮点数坐标列表
