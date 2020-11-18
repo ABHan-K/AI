@@ -1,6 +1,6 @@
 import numpy as np
 import AI_PopulationInitialization as pi
-import AI_FitnessCount as fc  # todo 预留适应度计算
+import AI_IntersectionPoints as ItP  # todo 预留适应度计算
 from random import randint
 
 
@@ -15,7 +15,7 @@ class Iteration:
         self.individual_num, self.individual_dat, self.dynamic_num = self.pop_ini.pop_data_get()
         self.fitness = np.zeros(self.individual_num)
         self.dead = np.zeros(self.individual_num)
-        self.fit = fc.fitness()  # todo 预留适应度计算
+        self.fit = ItP.IntersectionPoints(filename)  # todo 预留适应度计算
         self.pick_list = np.zeros(self.individual_num * 1 / 3)
         self.dead_list = np.zeros(self.individual_num * 2 / 3)
 
@@ -26,7 +26,7 @@ class Iteration:
                 当存在交点图时   -1
         """
         for i in range(self.individual_num):
-            self.fitness[i] = self.fit.fitcount(self.individual_dat[i])
+            self.fitness[i] = self.fit.float_intersection_num(self.individual_dat[i])
         m = 0
         while m <= j:
             if m in self.fitness:

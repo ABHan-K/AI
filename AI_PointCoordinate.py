@@ -32,17 +32,17 @@ class PointCoordinate:
             ftclist_withnumber[i][2] = ftclist_nonumber[i][1]  # 第三列为floatlist的小数部分，ftclist_nonumber矩阵的第二列
             i += 1
 
-        if (self.dynamic_or_static.bus_data[n][2] != 0) and (self.dynamic_or_static.bus_data[n][3] != 0):
+        if (self.dynamic_or_static.bus_data[n][1] != 0) and (self.dynamic_or_static.bus_data[n][2] != 0):
             # 判断是否为静态节点
-            self.xc = self.dynamic_or_static.bus_data[n][2]  # 由busdata读取静态节点的坐标
-            self.yc = self.dynamic_or_static.bus_data[n][3]
+            xc = self.dynamic_or_static.bus_data[n][1]  # 由busdata读取静态节点的坐标
+            yc = self.dynamic_or_static.bus_data[n][2]
 
         else:
             for i in range(self.dynamic_number):
                 if self.dynamic_or_static.dynamic_point[i][0] == n:  # 由ftclist_withnumber矩阵得到对应的x，y坐标
-                    self.xc = ftclist_withnumber[i][1]
-                    self.yc = ftclist_withnumber[i][2]
+                    xc = ftclist_withnumber[i][1]
+                    yc = ftclist_withnumber[i][2]
                 else:
                     i += 1
 
-        return self.xc, self.yc
+        return xc, yc

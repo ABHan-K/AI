@@ -74,11 +74,7 @@ class IntersectionPoints:
 
         return t  # 返回交点个数t
 
-    def get_intersection_num(self):  # 该函数用于返回交点数目
-        return self.d
 
 
 
-h = IntersectionPoints('自创数据.xlsx')
-h.get_intersection_num()
-print(h.get_intersection_num())
+
