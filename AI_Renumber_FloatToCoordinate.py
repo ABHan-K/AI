@@ -1,6 +1,5 @@
 import numpy as np
 import math
-import AI_ImportingNetworkData as ind
 import AI_Renumber_CoordinateToFloat as rctf
 
 
@@ -20,3 +19,16 @@ class Renumber_FloatToCoordinate:
                                                 - self.xycoordinate_data[i][1]) * 100)
             # 第三列y为浮点数坐标的小数部分
             i += 1
+
+    def coordinatelist(self, *floatlist):  # 建立输入浮点数列表输出xy坐标矩阵的函数coordinatelist
+
+        coordinatelist = np.zeros((self.dynamic_floatdata.dynamic_num, 2))  # 建立n行2列的矩阵储存xy坐标【x，y】
+        for i in range(self.dynamic_floatdata.dynamic_num):
+            coordinatelist[i][0] = int(floatlist[0][i] - math.floor(floatlist[0][i]))  # 第一列为浮点数的整数部分
+            coordinatelist[i][1] = int((floatlist[0][i] - floatlist[0][i]) * 100)  # 第二列为浮点数的小数部分
+            i += 1
+
+        return coordinatelist
+
+
+a = [1.9, 1.1]
