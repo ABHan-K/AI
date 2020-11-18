@@ -13,6 +13,7 @@ class PopIni:
         self.dynamic_num, self.dynamic_dat = self.net_data.get_data_for_iteration()
         self.pop = np.zeros((self.dynamic_num * 100, self.dynamic_num))  # 初始化节点坐标矩阵
         self.individual = ci.individual()  # todo 预留创建个体文件
+        self.pop_ini()
 
     def rand_location(self):  # return 横纵坐标
         x = random.randint(0, 24)
@@ -27,3 +28,6 @@ class PopIni:
 
     def pop_data_get(self):  # return 种群数量和种群矩阵和动态节点个数
         return self.dynamic_num * 100, self.individual, self.dynamic_num
+
+
+
