@@ -69,9 +69,12 @@ class IntersectionPoints:
             for j in range(i + 1, h):
                 m3 = int(self.get_linedata.line_point[j][0])
                 m4 = int(self.get_linedata.line_point[j][1])  # 得到第二条边的头尾两节点对应的重命名（重编号）
-                n = isintersec(com_node[m1 - 1, 0], com_node[m1 - 1, 1], com_node[m2 - 1, 0],
-                               com_node[m2 - 1, 1], com_node[m3 - 1, 0], com_node[m3 - 1, 1],
-                               com_node[m4 - 1, 0], com_node[m4 - 1, 1])
+                if m1 == m3 or m1 == m4 or m2 == m3 or m2 == m4:
+                    n = 0
+                else:
+                    n = isintersec(com_node[m1 - 1, 0], com_node[m1 - 1, 1], com_node[m2 - 1, 0],
+                                   com_node[m2 - 1, 1], com_node[m3 - 1, 0], com_node[m3 - 1, 1],
+                                   com_node[m4 - 1, 0], com_node[m4 - 1, 1])
                 t += n
             '''
                 p1_x, p1_y = self.get_line_coordinate.get_coordinate(m1, *floatlist)  # 利用重命名（重编号）得到两条边四个节点的坐标

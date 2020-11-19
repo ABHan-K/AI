@@ -29,7 +29,7 @@ class Iteration:
         """
         for i in range(self.individual_num):
             self.fitness[i] = self.fit.float_intersection_num(self.individual_dat[i])
-            print(i)
+            #print(i)
         m = 0
         while m <= j:
             if m in self.fitness:
@@ -105,7 +105,7 @@ class Iteration:
         j = 0
 
         a = self.fit_count(j)
-        while a == -1:
+        while a == -1 and i <20:
             self.killing()
             a = randint(0, self.individual_num * 1 / 3 - 1)
             b = randint(0, self.individual_num * 1 / 3 - 1)
@@ -113,7 +113,8 @@ class Iteration:
             a = self.fit_count(j)
             i += 1
             print(i)
-            if not (i % 100):
+            if not (i % 15):
                 j += 1
+            print(min(self.fitness))
 
-        return self.individual_dat[a[0]]
+        return self.individual_dat[a[0]] # todo a的取值

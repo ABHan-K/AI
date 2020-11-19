@@ -41,7 +41,7 @@ class Renumber_FloatToCoordinate:
 
     def complete_node(self, float_list):
 
-        print(float_list)
+        #print(float_list)
         coordinatelist = np.zeros((self.ind.rows0 - 1, 2))
         s_flag = 0
         d_flag = 0
