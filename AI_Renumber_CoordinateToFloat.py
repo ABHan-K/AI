@@ -18,11 +18,10 @@ class Renumber_CoordinateToFloat:
             i += 1
         '''
 
-    def floatlist(self, *coordinatearray):  # 建立将xy坐标转为浮点数数列的函数floatlist
-        floatlist = np.zeros(self.dynamic_num)  # 建立1行n列的数列存储浮点数坐标
-
+    def floatlist(self, coordinatearray):  # 建立将xy坐标转为浮点数数列的函数floatlist
+        floatlist = np.zeros(self.dynamic_num, dtype=np.float)  # 建立1行n列的数列存储浮点数坐标
+        # coordinatearray=coordinatearray[0]
         for i in range(self.dynamic_num):
-            floatlist[i] = float('%.2f' % (coordinatearray[i][0] + coordinatearray[i][1] / 100))  # 将浮点数存为x.y的形式
-            i += 1
+            floatlist[i] = (coordinatearray[i][0] + coordinatearray[i][1] / 100)  # 将浮点数存为x.y的形式
 
         return floatlist  # 返回浮点数坐标列表

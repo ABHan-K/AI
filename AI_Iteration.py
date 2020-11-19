@@ -14,10 +14,12 @@ class Iteration:
         self.pop_ini = pi.PopIni(filename)
         self.individual_num, self.individual_dat, self.dynamic_num = self.pop_ini.pop_data_get()
         self.fitness = np.zeros(self.individual_num)
+
         self.dead = np.zeros(self.individual_num)
         self.fit = ItP.IntersectionPoints(filename)  # todo 预留适应度计算
-        self.pick_list = np.zeros(self.individual_num * 1 / 3)
-        self.dead_list = np.zeros(self.individual_num * 2 / 3)
+
+        self.pick_list = np.zeros(int(self.individual_num / 3))
+        self.dead_list = np.zeros(int(self.individual_num * 2 / 3))
 
     def fit_count(self, j):
         """
@@ -27,6 +29,7 @@ class Iteration:
         """
         for i in range(self.individual_num):
             self.fitness[i] = self.fit.float_intersection_num(self.individual_dat[i])
+            print(i)
         m = 0
         while m <= j:
             if m in self.fitness:
@@ -41,13 +44,13 @@ class Iteration:
         :param c: 个体c
         :return: 最适应个体
         """
-        if self.individual_dat[a] < self.individual_dat[b]:
-            if self.individual_dat[a] < self.individual_dat[c]:
+        if self.fitness[a] < self.fitness[b]:
+            if self.fitness[a] < self.fitness[c]:
                 return a
             else:
                 return c
         else:
-            if self.individual_dat[b] < self.individual_dat[c]:
+            if self.fitness[b] < self.fitness[c]:
                 return b
             else:
                 return c
@@ -109,7 +112,8 @@ class Iteration:
             self.reproduction(a, b)
             a = self.fit_count(j)
             i += 1
-            if not (i % 20):
+            print(i)
+            if not (i % 100):
                 j += 1
 
         return self.individual_dat[a[0]]

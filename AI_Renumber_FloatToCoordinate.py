@@ -6,10 +6,10 @@ import AI_ImportingNetworkData as ind
 
 class Renumber_FloatToCoordinate:
     def __init__(self, filename):
-        self.dynamic_floatdata = rctf.Renumer_CoordinateToFloat(filename)
+        self.dynamic_floatdata = rctf.Renumber_CoordinateToFloat(filename)
         self.xycoordinate_data = np.zeros((self.dynamic_floatdata.dynamic_num, 3))
         self.ind = ind.Read(filename)
-        self.static_list = ind.static_point.T[0]
+        self.static_list = self.ind.static_point.T[0]
 
         # 将动态节点浮点数坐标重新转为直角坐标，初始化动态节点直角坐标矩阵xycoordinate_data：【重命名，坐标x，坐标y】
         '''
@@ -26,17 +26,22 @@ class Renumber_FloatToCoordinate:
             i += 1
         '''
 
+    '''
     def coordinatelist(self, *float_list):  # 建立输入浮点数列表输出xy坐标矩阵的函数coordinatelist
 
         coordinatelist = np.zeros((self.dynamic_floatdata.dynamic_num, 2))  # 建立n行2列的矩阵储存xy坐标【x，y】
+        float_list=float_list[0]
         for i in range(self.dynamic_floatdata.dynamic_num):
             coordinatelist[i][0] = int(math.floor(float_list[i]))  # 第一列为浮点数的整数部分
             coordinatelist[i][1] = int((float_list[i] % 1) * 100)  # 第二列为浮点数的小数部分
             i += 1
 
         return coordinatelist
+    '''
 
-    def complete_node(self, *float_list):
+    def complete_node(self, float_list):
+
+        print(float_list)
         coordinatelist = np.zeros((self.ind.rows0 - 1, 2))
         s_flag = 0
         d_flag = 0
