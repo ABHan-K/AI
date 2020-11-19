@@ -32,10 +32,10 @@ class PointCoordinate:
             ftclist_withnumber[i][2] = ftclist_nonumber[i][1]  # 第三列为floatlist的小数部分，ftclist_nonumber矩阵的第二列
             i += 1
 
-        if (self.dynamic_or_static.bus_data[n][1] != 0) and (self.dynamic_or_static.bus_data[n][2] != 0):
+        if (self.dynamic_or_static.bus_data[n - 1][1] != 0) and (self.dynamic_or_static.bus_data[n - 1][2] != 0):
             # 判断是否为静态节点
-            xc = self.dynamic_or_static.bus_data[n][1]  # 由busdata读取静态节点的坐标
-            yc = self.dynamic_or_static.bus_data[n][2]
+            xc = self.dynamic_or_static.bus_data[n - 1][1]  # 由busdata读取静态节点的坐标
+            yc = self.dynamic_or_static.bus_data[n - 1][2]
 
         else:
             for i in range(self.dynamic_number):
